@@ -18,7 +18,7 @@ enableScreens();
 function MealsNavigator() {
 	return (
 		<Stack.Navigator
-			initialRouteName="Categories"
+			initialRouteName="Favourites"
 			screenOptions={{
 				headerStyle: {
 					backgroundColor: Platform.OS === "android" ? Colors.primary : "",
@@ -26,11 +26,13 @@ function MealsNavigator() {
 				headerTintColor: "#fff",
 			}}
 		>
-			<Stack.Screen name="Categories" component={CategoryScreen} />
+			<Stack.Screen
+				options={{ title: "Your Favorites" }}
+				name="Favourites"
+				component={FavouritesScreen}
+			/>
+
 			<Stack.Screen name="MealDetail" component={MealDetailScreen} />
-			<Stack.Screen name="CategoryMeals" component={CategoryMealsScreen} />
-			<Stack.Screen name="Favourites" component={FavouritesScreen} />
-			<Stack.Screen name="Filters" component={FiltersScreen} />
 		</Stack.Navigator>
 	);
 }
