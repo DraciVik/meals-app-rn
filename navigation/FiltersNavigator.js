@@ -37,6 +37,18 @@ function FiltersNavigator(props) {
 							/>
 						</HeaderButtons>
 					),
+
+					headerRight: (navData) => (
+						<HeaderButtons HeaderButtonComponent={HeaderButton}>
+							<Item
+								title="Save"
+								iconName="ios-save"
+								onPress={() =>
+									console.log(props.route.state.routes[0].params.save())
+								}
+							/>
+						</HeaderButtons>
+					),
 				}}
 				navigation={props.navigation}
 			/>
