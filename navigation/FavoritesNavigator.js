@@ -9,13 +9,15 @@ import CategoryMealsScreen from "../screens/CategoryMealsScreen";
 import CategoryScreen from "../screens/CategoriesScreen";
 import FavouritesScreen from "../screens/FavouritesScreen";
 import FiltersScreen from "../screens/FiltersScreen";
+import HeaderButton from "../components/HeaderButtons";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import Colors from "../constants/Colors";
 
 const Stack = createStackNavigator();
 
 enableScreens();
 
-function MealsNavigator() {
+function MealsNavigator(props) {
 	return (
 		<Stack.Navigator
 			initialRouteName="Favourites"
@@ -30,6 +32,17 @@ function MealsNavigator() {
 				options={{ title: "Your Favorites" }}
 				name="Favourites"
 				component={FavouritesScreen}
+				options={{
+					headerLeft: (navData) => (
+						<HeaderButtons HeaderButtonComponent={HeaderButton}>
+							<Item
+								title="Menu"
+								iconName="ios-menu"
+								onPress={() => props.navigation.toggleDrawer()}
+							/>
+						</HeaderButtons>
+					),
+				}}
 			/>
 
 			<Stack.Screen name="MealDetail" component={MealDetailScreen} />

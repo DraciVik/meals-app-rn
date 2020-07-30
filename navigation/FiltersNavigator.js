@@ -2,23 +2,17 @@ import "react-native-gesture-handler";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Platform } from "react-native";
-import { enableScreens } from "react-native-screens";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import FiltersScreen from "../screens/FiltersScreen";
 import HeaderButton from "../components/HeaderButtons";
-import MealDetailScreen from "../screens/MealDetailScreen";
-import CategoryMealsScreen from "../screens/CategoryMealsScreen";
-import CategoryScreen from "../screens/CategoriesScreen";
-import FavouritesScreen from "../screens/FavouritesScreen";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+
 import Colors from "../constants/Colors";
 
 const Stack = createStackNavigator();
 
-enableScreens();
-
-function MealsNavigator(props) {
+function FiltersNavigator(props) {
 	return (
 		<Stack.Navigator
-			initialRouteName="Categories"
 			screenOptions={{
 				headerStyle: {
 					backgroundColor: Platform.OS === "android" ? Colors.primary : "",
@@ -26,17 +20,14 @@ function MealsNavigator(props) {
 				headerTitleStyle: {
 					fontFamily: "open-sans-bold",
 				},
-				// cardStyle: {
-				// 	paddingHorizontal: 10,
-				// },
-				headerBackTitleStyle: { fontFamily: "open-sans" },
 				headerTintColor: "#fff",
 			}}
 		>
 			<Stack.Screen
-				name="Categories"
-				component={CategoryScreen}
+				name="Filter"
+				component={FiltersScreen}
 				options={{
+					title: "Filter Meals",
 					headerLeft: () => (
 						<HeaderButtons HeaderButtonComponent={HeaderButton}>
 							<Item
@@ -47,12 +38,10 @@ function MealsNavigator(props) {
 						</HeaderButtons>
 					),
 				}}
+				navigation={props.navigation}
 			/>
-			<Stack.Screen name="MealDetail" component={MealDetailScreen} />
-			<Stack.Screen name="CategoryMeals" component={CategoryMealsScreen} />
-			<Stack.Screen name="Favourites" component={FavouritesScreen} />
 		</Stack.Navigator>
 	);
 }
 
-export default MealsNavigator;
+export default FiltersNavigator;
