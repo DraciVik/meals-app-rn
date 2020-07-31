@@ -5,6 +5,9 @@ import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import MealsNavigator from "./navigation/MealsNavigator";
 import DrawerNavigator from "./navigation/DrawerNavigator";
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
+import mealsReducer from "./store/reducers/meals";
 
 const fetchFonts = () => {
 	return Font.loadAsync({
@@ -12,6 +15,12 @@ const fetchFonts = () => {
 		"open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
 	});
 };
+
+const rootReducer = combineReducers({
+	meals: mealsReducer,
+});
+
+const store = createStore(rootReducer);
 
 export default function App() {
 	const [fontLoaded, setFontLoaded] = useState(false);
@@ -25,7 +34,11 @@ export default function App() {
 		);
 	}
 
-	return <DrawerNavigator />;
+	return (
+		<Provider store={store}>
+			<DrawerNavigator />
+		</Provider>
+	);
 }
 
 const styles = StyleSheet.create({
